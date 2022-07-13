@@ -65,7 +65,7 @@ export default function LoginForm() {
       <p className="password-role">Senha</p>
       <Input
         placeholder="********"
-        type="text"
+        type="password"
         data-test-id="common_login__input-password"
         value={ user.password }
         onChange={ ({ target }) => setUser({ ...user, password: target.value }) }
