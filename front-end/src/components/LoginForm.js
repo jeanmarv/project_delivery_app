@@ -58,7 +58,7 @@ export default function LoginForm() {
       <Input
         placeholder="email@trybeer.com.br"
         type="text"
-        data-test-id="common_login__input-email"
+        data-testid="common_login__input-email"
         value={ user.email }
         onChange={ ({ target }) => setUser({ ...user, email: target.value }) }
       />
@@ -66,14 +66,14 @@ export default function LoginForm() {
       <Input
         placeholder="********"
         type="password"
-        data-test-id="common_login__input-password"
+        data-testid="common_login__input-password"
         value={ user.password }
         onChange={ ({ target }) => setUser({ ...user, password: target.value }) }
       />
       <Button
         type="button"
         className="login-btn"
-        data-test-id="common_login__button-login"
+        data-testid="common_login__button-login"
         disabled={ !!(
           user.password.length < MIN_PASSWORD_LENGTH || !/\S+@\S+\.\S+/.test(user.email)
         ) }
@@ -84,7 +84,7 @@ export default function LoginForm() {
       <Button
         type="button"
         className="register-btn"
-        data-test-id="common_login__button-register"
+        data-testid="common_login__button-register"
         onClick={ () => navigate('/register') }
       >
         Ainda não tenho conta

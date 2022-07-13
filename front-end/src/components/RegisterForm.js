@@ -59,7 +59,7 @@ export default function RegisterForm() {
       <Input
         placeholder="Seu nome"
         type="text"
-        data-test-id="common_register__input-name"
+        data-testid="common_register__input-name"
         value={ user.name }
         onChange={ ({ target }) => setUser({ ...user, name: target.value }) }
       />
@@ -67,7 +67,7 @@ export default function RegisterForm() {
       <Input
         placeholder="seu-email@site.com.br"
         type="text"
-        data-test-id="common_register__input-email"
+        data-testid="common_register__input-email"
         value={ user.email }
         onChange={ ({ target }) => setUser({ ...user, email: target.value }) }
       />
@@ -75,14 +75,14 @@ export default function RegisterForm() {
       <Input
         placeholder="********"
         type="password"
-        data-test-id="common_register__input-password"
+        data-testid="common_register__input-password"
         value={ user.password }
         onChange={ ({ target }) => setUser({ ...user, password: target.value }) }
       />
       <Button
         type="button"
         className="login-btn"
-        data-test-id="common_register__button-register"
+        data-testid="common_register__button-register"
         disabled={ !!(
           user.password.length < MIN_PASSWORD_LENGTH
           || !/\S+@\S+\.\S+/.test(user.email)
