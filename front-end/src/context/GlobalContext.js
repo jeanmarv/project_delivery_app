@@ -14,8 +14,10 @@ export function GlobalProvider({ children }) {
     email: '',
   });
 
+  const [error, setError] = useState('');
+
   return (
-    <GlobalContext.Provider value={ { user, setUser } }>
+    <GlobalContext.Provider value={ { user, setUser, error, setError } }>
       {children}
     </GlobalContext.Provider>
   );
