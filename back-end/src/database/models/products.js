@@ -1,6 +1,5 @@
 const Product = (sequelize, DataTypes) => {
   const Product = sequelize.define("Product", {
-    id: DataTypes.INTEGER,
     name: DataTypes.STRING,
     price: DataTypes.DECIMAL,
     urlImage: DataTypes.STRING,
