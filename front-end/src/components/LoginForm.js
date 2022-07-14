@@ -37,9 +37,6 @@ const LoginFormContainer = styled(ContainerCenter)`
     margin-top: 20px;
     border: 1px solid var(--color-main-green);
   }
-
-  span {
-  }
 `;
 
 const MIN_PASSWORD_LENGTH = 6;
@@ -49,7 +46,8 @@ export default function LoginForm() {
   const { user, setUser } = useContext(GlobalContext);
 
   const handleClick = () => {
-    console.log(user);
+    setUser({ ...user, role: 'customer' });
+    navigate('/');
   };
 
   return (
