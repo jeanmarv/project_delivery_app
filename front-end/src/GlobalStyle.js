@@ -17,7 +17,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   :root {
-    --color-main-green: #036B52;
+    --color-main-green: #036b52;
     --color-light-green: #2fc18c;
 
     --color-blue: #056cf9;
@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 
     --color-light-gray: #eaf1ef;
     --color-medium-gray: #b1c2be;
-    --color-darker-gray: #828282
+    --color-darker-gray: #828282;
   }
 `;
 
