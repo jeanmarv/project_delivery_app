@@ -13,7 +13,7 @@ export default function SellerOrders() {
   return (
     <SellerOrdersContainer>
       <Header />
-      Oi
+      SellerOrders
     </SellerOrdersContainer>
   );
 }
