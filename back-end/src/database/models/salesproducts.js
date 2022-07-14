@@ -2,7 +2,6 @@ const SaleProduct = (sequelize, DataTypes) => {
   const SaleProduct = sequelize.define("SaleProduct", {
     quantity: DataTypes.INTEGER,
   }, {
-    underscored: true,
     timestamps: false,
     modelName: 'SaleProducts',
   });

@@ -4,7 +4,6 @@ const Product = (sequelize, DataTypes) => {
     price: DataTypes.DECIMAL,
     urlImage: DataTypes.STRING,
   }, {
-    underscored: true,
     timestamps: false,
     modelName: 'Products',
   });

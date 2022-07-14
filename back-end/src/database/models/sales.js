@@ -6,7 +6,6 @@ const Sale = (sequelize, DataTypes) => {
     saleDate: DataTypes.DATE,
     status: DataTypes.STRING,
   }, {
-    underscored: true,
     timestamps: false,
     modelName: 'Sales',
   });

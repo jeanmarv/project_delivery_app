@@ -5,7 +5,6 @@ const User = (sequelize, DataTypes) => {
     password: DataTypes.STRING,
     role: DataTypes.STRING,
   }, {
-    underscored: true,
     timestamps: false,
     modelName: 'Users',
   });
