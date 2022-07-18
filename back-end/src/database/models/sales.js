@@ -7,7 +7,7 @@ const Sale = (sequelize, DataTypes) => {
     status: DataTypes.STRING,
   }, {
     timestamps: false,
-    modelName: 'Sales',
+    modelName: 'sales',
   });
 
   Sale.associate = (models) => {

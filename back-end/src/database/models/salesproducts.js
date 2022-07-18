@@ -3,7 +3,7 @@ const SaleProduct = (sequelize, DataTypes) => {
     quantity: DataTypes.INTEGER,
   }, {
     timestamps: false,
-    modelName: 'SaleProducts',
+    modelName: 'sales_products',
   });
 
   SaleProduct.associate = (models) => {

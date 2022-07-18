@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalContext from '../context/GlobalContext';
 import Button from './base/Button';
 import ContainerCenter from './base/ContainerCenter';
 import Input from './base/Input';
+import post from '../api/post';
 
 const RegisterFormContainer = styled(ContainerCenter)`
   flex-direction: column;
@@ -46,11 +47,21 @@ const MIN_PASSWORD_LENGTH = 6;
 const MIN_NAME_LENGTH = 12;
 
 export default function RegisterForm() {
-  // const navigate = useNavigate();
-  const { user, setUser } = useContext(GlobalContext);
+  const navigate = useNavigate();
+  const { user, setUser, setError } = useContext(GlobalContext);
 
-  const handleClick = () => {
-    console.log(user);
+  const handleClick = async () => {
+    const request = await post(
+      'register',
+      { email: user.email, password: user.password, name: user.name },
+    );
+    if (request.error) {
+      setError(request.error);
+      return;
+    }
+    await setUser({ ...user, ...request });
+    await setError('');
+    navigate('/');
   };
 
   return (
