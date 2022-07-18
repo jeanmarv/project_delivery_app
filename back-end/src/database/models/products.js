@@ -5,7 +5,7 @@ const Product = (sequelize, DataTypes) => {
     urlImage: DataTypes.STRING,
   }, {
     timestamps: false,
-    modelName: 'Products',
+    modelName: 'products',
   });
 
   return Product;
