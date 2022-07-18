@@ -30,7 +30,7 @@ export default function Register() {
       {error && (
         <p
           className="errorMessage"
-          data-testid="common_login__element-invalid-email"
+          data-testid="common_register__element-invalid_register"
         >
           {error}
         </p>)}
