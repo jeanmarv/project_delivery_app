@@ -47,16 +47,14 @@ export default function LoginForm() {
   const { user, setUser, setError } = useContext(GlobalContext);
 
   const handleClick = async () => {
-    try {
-      const request = await post('login', { email: user.email, password: user.password });
-      if (request.role) {
-        await setUser({ ...user, ...request });
-        await setError('');
-        navigate('/');
-      }
-    } catch (err) {
-      setError(err.message);
+    const request = await post('login', { email: user.email, password: user.password });
+    if (request.error) {
+      setError(request.error);
+      return;
     }
+    await setUser({ ...user, ...request });
+    await setError('');
+    navigate('/');
   };
 
   return (
