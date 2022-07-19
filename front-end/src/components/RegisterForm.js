@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalContext from '../context/GlobalContext';
 import Button from './base/Button';
@@ -47,8 +46,7 @@ const MIN_PASSWORD_LENGTH = 6;
 const MIN_NAME_LENGTH = 12;
 
 export default function RegisterForm() {
-  const navigate = useNavigate();
-  const { user, setUser, setError } = useContext(GlobalContext);
+  const { user, setUser, setError, navigate } = useContext(GlobalContext);
 
   const handleClick = async () => {
     const request = await post(

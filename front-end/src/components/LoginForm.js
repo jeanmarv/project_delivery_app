@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import post from '../api/post';
 import GlobalContext from '../context/GlobalContext';
@@ -43,8 +42,7 @@ const LoginFormContainer = styled(ContainerCenter)`
 const MIN_PASSWORD_LENGTH = 6;
 
 export default function LoginForm() {
-  const navigate = useNavigate();
-  const { user, setUser, setError } = useContext(GlobalContext);
+  const { user, setUser, setError, navigate } = useContext(GlobalContext);
 
   const handleClick = async () => {
     const request = await post('login', { email: user.email, password: user.password });
