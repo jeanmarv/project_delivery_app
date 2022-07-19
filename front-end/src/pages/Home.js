@@ -1,20 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import GlobalContext from '../context/GlobalContext';
 
-export default function Home() {
-  const { user, setUser } = useContext(GlobalContext);
+const avaibleRoles = ['administrator', 'seller', 'customer'];
 
-  if (!user.role) return <Navigate to="/login" />;
-  if (user.role === 'administrator') return <Navigate to="/admin/manage" />;
-  if (user.role === 'seller') return <Navigate to="/seller/orders" />;
-  if (user.role === 'customer') return <Navigate to="/customer/products" />;
-  setUser({
-    name: '',
-    password: '',
-    token: '',
-    role: '',
-    email: '',
-  });
+export default function Home() {
+  const { user, resetUser } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (!avaibleRoles.includes(user.role) && user.role !== '') resetUser();
+  }, [resetUser, user.role]);
+
+  if (avaibleRoles.includes(user.role)) {
+    delete user.password;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  if (user.role === avaibleRoles[0]) return <Navigate to="/admin/manage" />;
+  if (user.role === avaibleRoles[1]) return <Navigate to="/seller/orders" />;
+  if (user.role === avaibleRoles[2]) return <Navigate to="/customer/products" />;
+
   return <Navigate to="/login" />;
 }
