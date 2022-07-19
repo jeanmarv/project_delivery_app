@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import post from '../api/post';
+import { login } from '../api/requests';
 import GlobalContext from '../context/GlobalContext';
 import Button from './base/Button';
 import ContainerCenter from './base/ContainerCenter';
@@ -45,7 +45,7 @@ export default function LoginForm() {
   const { user, setUser, setError, navigate } = useContext(GlobalContext);
 
   const handleClick = async () => {
-    const request = await post('login', { email: user.email, password: user.password });
+    const request = await login({ email: user.email, password: user.password });
     if (request.error) {
       setError(request.error);
       return;

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+import { register } from '../api/requests';
 import GlobalContext from '../context/GlobalContext';
 import Button from './base/Button';
 import ContainerCenter from './base/ContainerCenter';
 import Input from './base/Input';
-import post from '../api/post';
 
 const RegisterFormContainer = styled(ContainerCenter)`
   flex-direction: column;
@@ -49,8 +49,7 @@ export default function RegisterForm() {
   const { user, setUser, setError, navigate } = useContext(GlobalContext);
 
   const handleClick = async () => {
-    const request = await post(
-      'register',
+    const request = await register(
       { email: user.email, password: user.password, name: user.name },
     );
     if (request.error) {
