@@ -9,6 +9,16 @@ const User = (sequelize, DataTypes) => {
     tableName: 'users',
   });
 
+  User.associate = (models) => {
+    User.hasMany(models.Sales,
+      { foreignKey: 'user_id', as: 'User' });
+  };
+
+  User.associate = (models) => {
+    User.hasMany(models.Sales,
+      { foreignKey: 'seller_id', as: 'Seller' });
+  };
+
   return User;
 };
 
