@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import GlobalContext from '../context/GlobalContext';
 import Button from './base/Button';
@@ -19,6 +18,16 @@ const HeaderContainer = styled(Container)`
     font-weight: 500;
     height: 100%;
     background-color: var(--color-light-green);
+  }
+
+  .my-requests-btn {
+    width: 20vw;
+    font-weight: 500;
+    height: 100%;
+    background-color: var(--color-light-green);
+    border-radius: 0;
+    font-size: 16px;
+    padding: 0;
   }
 
   .username {
@@ -46,18 +55,30 @@ const HeaderContainer = styled(Container)`
 `;
 
 export default function Header() {
-  const navigate = useNavigate();
-  const { user } = useContext(GlobalContext);
+  const { user, resetUser } = useContext(GlobalContext);
+
+  const handleLogout = () => {
+    resetUser();
+  };
+
+  const role = () => {
+    if (user.role === 'administrator') return 'GERENCIAR USUÁRIOS';
+    if (user.role === 'seller') return 'PEDIDOS';
+    if (user.role === 'customer') return 'PRODUTOS';
+  };
 
   return (
     <HeaderContainer>
       <ContainerCenter className="role">
-        PEDIDOS
+        {role()}
       </ContainerCenter>
+      <Button className="my-requests-btn">
+        {user.role === 'customer' && 'MEUS PEDIDOS'}
+      </Button>
       <ContainerCenter className="username">
         {user.name.length === 0 ? 'User' : user.name}
       </ContainerCenter>
-      <Button className="exit-btn" type="button" onClick={ () => navigate('/login') }>
+      <Button className="exit-btn" type="button" onClick={ handleLogout }>
         Sair
       </Button>
     </HeaderContainer>
