@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ContainerCenter from '../components/base/ContainerCenter';
 import Header from '../components/Header';
+import GlobalContext from '../context/GlobalContext';
 
 const SellerOrdersContainer = styled(ContainerCenter)`
   height: 100vh;
@@ -10,6 +11,10 @@ const SellerOrdersContainer = styled(ContainerCenter)`
 `;
 
 export default function SellerOrders() {
+  const { user, resetUser } = useContext(GlobalContext);
+
+  if (user.role !== 'seller') resetUser();
+
   return (
     <SellerOrdersContainer>
       <Header />
