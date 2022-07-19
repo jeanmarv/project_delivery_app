@@ -1,23 +1,42 @@
 import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+
+const defaultUser = {
+  name: '',
+  password: '',
+  token: '',
+  role: '',
+  email: '',
+};
 
 const GlobalContext = createContext();
 
 export default GlobalContext;
 
 export function GlobalProvider({ children }) {
-  const [user, setUser] = useState({
-    name: '',
-    password: '',
-    token: '',
-    role: '',
-    email: '',
-  });
+  const navigate = useNavigate();
+  const [user, setUser] = useState(defaultUser);
 
   const [error, setError] = useState('');
 
+  const resetUser = () => {
+    setUser(defaultUser);
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
-    <GlobalContext.Provider value={ { user, setUser, error, setError } }>
+    <GlobalContext.Provider
+      value={ {
+        user,
+        setUser,
+        error,
+        setError,
+        resetUser,
+        navigate,
+      } }
+    >
       {children}
     </GlobalContext.Provider>
   );
