@@ -13,14 +13,20 @@ const salesProducts = (sequelize, DataTypes) => {
     models.Products.belongsToMany(models.Sales, {
       as: 'Sales',
       through: salesProducts,
-      foreignKey: 'product_id', 
+      foreignKey: {
+        field: 'product_id',
+        name: 'productId'
+      }, 
       otherKey: 'sale_id',
     });
 
     models.Sales.belongsToMany(models.Products, {
       as: 'Products',
       through: salesProducts,
-      foreignKey: 'sale_id',
+      foreignKey: {
+        field: 'sale_id',
+        name: 'saleId'
+      },
       otherKey: 'product_id',
     });
   };
