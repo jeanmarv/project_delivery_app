@@ -13,6 +13,6 @@ const validateToken = async (req, res, next) => {
         return res.status(401).json({ message: 'Expired or invalid token' });
     }
     next();
-}
+};
 
 module.exports = validateToken;

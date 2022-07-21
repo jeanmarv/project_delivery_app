@@ -5,7 +5,7 @@ const { User } = require('../../database/models');
 const getAll = async () => {
   const users = await User.findAll({
     where: { role: { [Op.not]: 'administrator' } },
-    attributes: { exclude: ['password'] }
+    attributes: { exclude: ['password'] },
   });
   return users;
 };
