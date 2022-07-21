@@ -1,7 +1,8 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { getProducts } from '../api/requests';
 import Container from '../components/base/Container';
+import ContainerCenter from '../components/base/ContainerCenter';
 import Header from '../components/Header';
 import GlobalContext from '../context/GlobalContext';
 
@@ -10,26 +11,30 @@ const CustomerProductsContainer = styled(Container)`
   width: 100vw;
   flex-direction: column;
 
-  button {
-    position: absolute;
-    top: 200px;
+  .products-container {
+    margin-top: 70px;
+    flex-wrap: wrap;
   }
 `;
 
-const handleClick = async () => {
-  const products = await getProducts();
-  console.log(products);
-};
-
 export default function CustomerProducts() {
+  const [products, setProducts] = useState([]);
+  
   const { user, resetUser } = useContext(GlobalContext);
+  
+  useEffect(() => {
+    async function fetchProducts() { setProducts(await getProducts()); }
+    fetchProducts();
+  }, [setProducts]);
 
   if (user.role !== 'customer') resetUser();
 
   return (
     <CustomerProductsContainer>
       <Header />
-      <button type="button" onClick={ handleClick }>pegar produtos</button>
+      <ContainerCenter className="products-container">
+        {products && products.map((product) => <p key={product.id}>{product.name}</p>)}
+      </ContainerCenter>
     </CustomerProductsContainer>
   );
 }
