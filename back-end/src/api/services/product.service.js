@@ -1,8 +1,16 @@
 const { Products } = require('../../database/models');
 
-const product = async (_id) => {
-  const getProducts = await Products.findAll();
-  return getProducts;
-};
+async function getAll() {
+    const getAllProducts = await Products.findAll();
+    return getAllProducts;
+}
 
-module.exports = product;
+async function getById(id) {
+    const product = await Products.findByPk(id);
+    return product;
+}
+
+module.exports = {
+  getAll,
+  getById,
+};
