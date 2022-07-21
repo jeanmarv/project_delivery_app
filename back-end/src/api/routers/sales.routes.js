@@ -8,5 +8,4 @@ router.get('/seller/orders', salesController.getAllSalesController);
 router.get('/seller/orders/:id', salesController.getSalesByIdController);
 router.put('/seller/orders/:id', salesController.updateStatusSalesController);
 
-
-module.exports = router; 
+module.exports = router;
