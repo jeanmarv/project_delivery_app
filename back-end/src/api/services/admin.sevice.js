@@ -18,8 +18,8 @@ const register = async ({ name, email, password, role }) => {
   return { name, email, role };
 };
 
-const destroy = async ({ name, email }) => {
-  await User.destroy({ where: { name, email } });
+const destroy = async ({ email }) => {
+  await User.destroy({ where: { email } });
 };
 
 module.exports = { getAll, register, destroy };
