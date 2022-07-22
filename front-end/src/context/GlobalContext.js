@@ -23,7 +23,6 @@ export function GlobalProvider({ children }) {
   const resetUser = () => {
     setUser(defaultUser);
     localStorage.removeItem('user');
-    navigate('/');
   };
 
   return (
