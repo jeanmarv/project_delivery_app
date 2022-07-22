@@ -9,7 +9,7 @@ export default function AdminManage() {
   const { user } = useContext(GlobalContext);
 
   if (user.role !== 'administrator') {
-    Navigate('/');
+    return <Navigate to="/" />;
   }
 
   return (
@@ -24,6 +24,5 @@ export default function AdminManage() {
       <AdminForm />
       <AdminTable />
     </div>
-
   );
 }

@@ -1,8 +1,10 @@
 const { Router } = require('express');
-const productController = require('../controllers/product.controller');
+const { getProducts, getProductById } = require('../controllers/product.controller');
+const validateToken = require('../middlewares/token.auth');
 
 const router = Router();
 
-router.get('/products', productController);
+router.get('/products', validateToken, getProducts);
+router.get('/products/:id', validateToken, getProductById);
 
 module.exports = router;
