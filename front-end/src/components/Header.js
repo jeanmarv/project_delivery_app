@@ -12,6 +12,7 @@ const HeaderContainer = styled(Container)`
   position: fixed;
   background-color: var(--color-main-green);
   font-size: 18px;
+  z-index: 10;
 
   .role {
     width: 20vw;

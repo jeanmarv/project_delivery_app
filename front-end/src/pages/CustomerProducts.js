@@ -5,6 +5,8 @@ import Container from '../components/base/Container';
 import ContainerCenter from '../components/base/ContainerCenter';
 import Header from '../components/Header';
 import GlobalContext from '../context/GlobalContext';
+import ProductCard from '../components/ProductCard';
+
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;
@@ -33,7 +35,11 @@ export default function CustomerProducts() {
     <CustomerProductsContainer>
       <Header />
       <ContainerCenter className="products-container">
-        {products && products.map((product) => <p key={product.id}>{product.name}</p>)}
+        {products && products.map((product) => (
+          <ProductCard key={product.id} product={product}>
+            {product.name}
+          </ProductCard>
+        ))}
       </ContainerCenter>
     </CustomerProductsContainer>
   );
