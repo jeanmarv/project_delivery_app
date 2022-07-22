@@ -1,8 +1,8 @@
-import styled from "styled-components"
-import ContainerCenter from "./base/ContainerCenter"
-import Button from '../components/base/Button';
-import Input from '../components/base/Input';
-import { useState } from "react";
+import styled from 'styled-components';
+import React, { useState } from 'react';
+import ContainerCenter from './base/ContainerCenter';
+import Button from './base/Button';
+import Input from './base/Input';
 
 const ProductCardContainer = styled(ContainerCenter)`
   flex-direction: column;
@@ -67,33 +67,33 @@ const ProductCardContainer = styled(ContainerCenter)`
   }
 `;
 
-export default function ProductCard({product}) {
+export default function ProductCard({ product }) {
   const [productQty, setProductQty] = useState(0);
 
   return (
     <ProductCardContainer>
       <p className="price-product">{product.price}</p>
-      <img src={product.urlImage}/>
+      <img src={ product.urlImage } alt={ product.name } />
       <ContainerCenter className="footer-infos">
         <p className="name-product">{product.name}</p>
         <ContainerCenter>
-          <Button 
+          <Button
             className="btn btn-minus"
-            type="button" 
-            onClick={ () => setProductQty(+productQty - 1)}
+            type="button"
+            onClick={ () => setProductQty(+productQty - 1) }
           >
             -
           </Button>
-          <Input 
-            type="number" 
-            onChange={ ({ target}) => setProductQty(target.value)} 
-            value={productQty}
-            className="input-productQty"  
+          <Input
+            type="number"
+            onChange={ ({ target }) => setProductQty(target.value) }
+            value={ productQty }
+            className="input-productQty"
           />
           <Button
             className="btn btn-plus"
-            type="button" 
-            onClick={ () => setProductQty(+productQty + 1)}
+            type="button"
+            onClick={ () => setProductQty(+productQty + 1) }
           >
             +
           </Button>
@@ -102,3 +102,11 @@ export default function ProductCard({product}) {
     </ProductCardContainer>
   );
 }
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    urlImage: PropTypes.string.isRequired,
+  }).isRequired,
+};
