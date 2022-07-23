@@ -1,5 +1,6 @@
-import styled from 'styled-components';
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ContainerCenter from './base/ContainerCenter';
 import Button from './base/Button';
 import Input from './base/Input';
@@ -72,13 +73,28 @@ export default function ProductCard({ product }) {
 
   return (
     <ProductCardContainer>
-      <p className="price-product">{product.price}</p>
-      <img src={ product.urlImage } alt={ product.name } />
+      <p
+        data-testid={ `customer_products__element-card-price-${product.id}` }
+        className="price-product"
+      >
+        {product.price}
+      </p>
+      <img
+        data-testid={ `customer_products__img-card-bg-image-${product.id}` }
+        src={ product.urlImage }
+        alt={ product.name }
+      />
       <ContainerCenter className="footer-infos">
-        <p className="name-product">{product.name}</p>
+        <p
+          data-testid={ `customer_products__element-card-title-${product.id}` }
+          className="name-product"
+        >
+          {product.name}
+        </p>
         <ContainerCenter>
           <Button
             className="btn btn-minus"
+            data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
             onClick={ () => setProductQty(+productQty - 1) }
           >
@@ -88,10 +104,12 @@ export default function ProductCard({ product }) {
             type="number"
             onChange={ ({ target }) => setProductQty(target.value) }
             value={ productQty }
+            data-testid={ `customer_products__input-card-quantity-${product.id}` }
             className="input-productQty"
           />
           <Button
             className="btn btn-plus"
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
             onClick={ () => setProductQty(+productQty + 1) }
           >
@@ -105,8 +123,9 @@ export default function ProductCard({ product }) {
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
+    price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
   }).isRequired,
 };

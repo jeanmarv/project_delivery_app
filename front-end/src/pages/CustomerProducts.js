@@ -25,7 +25,12 @@ export default function CustomerProducts() {
   const { user, resetUser } = useContext(GlobalContext);
 
   useEffect(() => {
-    async function fetchProducts() { setProducts(await getProducts()); }
+    async function fetchProducts() {
+      const request = await getProducts();
+      if (request.error) return;
+
+      setProducts(request);
+    }
     fetchProducts();
   }, [setProducts]);
 
@@ -39,7 +44,11 @@ export default function CustomerProducts() {
       <Header />
       <ContainerCenter className="products-container">
         {products && products.map((product) => (
-          <ProductCard key={ product.id } product={ product }>
+          <ProductCard
+            key={ product.id }
+            data-testid={ `customer_products__element-card-price-${product.id}` }
+            product={ product }
+          >
             {product.name}
           </ProductCard>
         ))}

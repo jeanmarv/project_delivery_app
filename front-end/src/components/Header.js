@@ -70,12 +70,20 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <ContainerCenter className="role">
-        {role()}
-      </ContainerCenter>
-      <Button className="my-requests-btn">
-        {user.role === 'customer' && 'MEUS PEDIDOS'}
-      </Button>
+      {user.role === 'customer' ? (
+        <>
+          <ContainerCenter className="role">
+            {role()}
+          </ContainerCenter>
+          <Button className="my-requests-btn">
+            {user.role === 'customer' && 'MEUS PEDIDOS'}
+          </Button>
+        </>
+      ) : (
+        <ContainerCenter className="role">
+          {role()}
+        </ContainerCenter>
+      )}
       <ContainerCenter className="username">
         {user.name.length === 0 ? 'User' : user.name}
       </ContainerCenter>
