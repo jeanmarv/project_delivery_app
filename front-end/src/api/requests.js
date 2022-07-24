@@ -1,12 +1,5 @@
 const axios = require('axios');
 
-function getToken() {
-  const user = JSON.parse(localStorage.getItem('user'));
-  if (user) {
-    axios.defaults.headers.common.Authorization = user.token;
-  }
-}
-
 const URL = 'http://localhost:3001';
 
 function getToken() {
