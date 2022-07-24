@@ -22,10 +22,12 @@ const registerUser = async (req, res, _next) => {
 
 const deleteUser = async (req, res, _next) => {
   const { body } = req;
+  console.log(body);
   try {
     await adminService.destroy(body);
     return res.status(204).end();
   } catch (err) {
+    console.log(err);
     return res.status(500).json(err);
   }
 };
