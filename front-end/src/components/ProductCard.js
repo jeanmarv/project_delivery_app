@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ContainerCenter from './base/ContainerCenter';
 import Button from './base/Button';
 import Input from './base/Input';
+import GlobalContext from '../context/GlobalContext';
 
 const ProductCardContainer = styled(ContainerCenter)`
   flex-direction: column;
@@ -70,6 +71,21 @@ const ProductCardContainer = styled(ContainerCenter)`
 
 export default function ProductCard({ product }) {
   const [productQty, setProductQty] = useState(0);
+
+  const { products, setProducts, setTotalValue } = useContext(GlobalContext);
+
+  useEffect(() => {
+    const productInfo = products[product.id - 1];
+    productInfo.quantity = productQty;
+    products[product.id - 1] = productInfo;
+    setProducts(products);
+
+    const value = products.reduce((total, pr) => {
+      if (pr.quantity > 0) return total + (pr.quantity * parseFloat(pr.price));
+      return total;
+    }, 0);
+    setTotalValue(value);
+  }, [product.id, products, productQty, setProducts, setTotalValue]);
 
   return (
     <ProductCardContainer>
