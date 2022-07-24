@@ -24,11 +24,8 @@ export default GlobalContext;
 export function GlobalProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(defaultUser);
-<<<<<<< HEAD
   const [newUser, setNewUser] = useState(createUser);
-=======
   const [products, setProducts] = useState([]);
->>>>>>> a6be7f75 (Add total value logic)
   const [error, setError] = useState('');
   const [totalValue, setTotalValue] = useState(0);
 
