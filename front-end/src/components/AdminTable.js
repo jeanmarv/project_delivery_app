@@ -17,7 +17,7 @@ export default function AdminTable() {
       setUsers(request);
     }
     fetchUsers();
-  }, [users]);
+  }, [users, setError]);
 
   const handleClick = async (email) => {
     await deleteUser({ email });
