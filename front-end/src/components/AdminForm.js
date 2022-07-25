@@ -25,6 +25,12 @@ export default function AdminForm() {
     setError('');
   };
 
+  const validEmail = /\S+@\S+\.\S+/;
+  const disableButton = validEmail.test(user.email)
+    && user.password.length >= 6
+    && user.name.length > 12
+    && user.role !== undefined;
+
   return (
     <form>
       <label htmlFor="name">
@@ -33,7 +39,7 @@ export default function AdminForm() {
           type="text"
           placeholder="Tryber de oliveira"
           value={ newUser.name }
-          data-testid="admin_manage__input-email"
+          data-testid="admin_manage__input-name"
           onChange={ ({ target }) => setNewUser({ ...newUser, name: target.value }) }
         />
       </label>
@@ -75,6 +81,7 @@ export default function AdminForm() {
       <button
         type="button"
         data-testid="admin_manage__button-register"
+        disabled={ !disableButton }
         onClick={ handleClick }
       >
         CADASTRAR
