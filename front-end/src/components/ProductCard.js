@@ -145,6 +145,6 @@ ProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
-    quantity: PropTypes.number.isRequired,
+    quantity: PropTypes.number,
   }).isRequired,
 };
