@@ -25,10 +25,12 @@ export default function AdminForm() {
     setError('');
   };
 
+  const passlength = 6;
+  const namelength = 12;
   const validEmail = /\S+@\S+\.\S+/;
   const disableButton = validEmail.test(user.email)
-    && user.password.length >= 6
-    && user.name.length > 12
+    && user.password.length >= passlength
+    && user.name.length > namelength
     && user.role !== undefined;
 
   return (
