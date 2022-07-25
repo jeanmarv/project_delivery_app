@@ -15,12 +15,13 @@ const CustomerProductsContainer = styled(Container)`
   .ahh {
     margin-top: 70px;
     padding: 20px;
+    flex-direction: column;
   }
 `;
 
 export default function CustomerProducts() {
   const {
-    user, resetUser,
+    user, resetUser, totalValue,
   } = useContext(GlobalContext);
 
   if (user.role !== 'customer') {
@@ -34,6 +35,10 @@ export default function CustomerProducts() {
       <ContainerCenter className="ahh">
         <h1>Finalizar Pedido</h1>
         <CheckoutTable />
+        <h1>
+          {'Total: R$ '}
+          <span>{totalValue.toFixed(2).replace('.', ',')}</span>
+        </h1>
       </ContainerCenter>
     </CustomerProductsContainer>
   );

@@ -9,11 +9,13 @@ export default function CheckoutTable() {
   useEffect(() => {
     const ahh = products.filter(({ quantity }) => quantity > 0);
     setCarShop(ahh);
-  }, [products]);
+  }, [products, setProducts]);
 
   const handleClick = (id) => {
-    products[id - 1].quantity = 0;
-    setProducts(products);
+    const ahh = products;
+    ahh[id - 1].quantity = 0;
+    console.log(ahh);
+    setProducts(ahh);
   };
 
   return (
@@ -29,7 +31,7 @@ export default function CheckoutTable() {
         </tr>
       </thead>
       <tbody>
-        {products && carShop.map((product, index) => {
+        {carShop.map((product, index) => {
           const { id, name: description, quantity, price } = product;
           if (quantity > 0) {
             return (
