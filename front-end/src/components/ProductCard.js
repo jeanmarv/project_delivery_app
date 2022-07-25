@@ -93,7 +93,7 @@ export default function ProductCard({ product }) {
         data-testid={ `customer_products__element-card-price-${product.id}` }
         className="price-product"
       >
-        {product.price}
+        {product.price.replace('.', ',')}
       </p>
       <img
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
@@ -110,7 +110,7 @@ export default function ProductCard({ product }) {
         <ContainerCenter>
           <Button
             className="btn btn-minus"
-            data-testid={ `customer_products__button-card-add-item-${product.id}` }
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
             onClick={ () => setProductQty(+productQty - 1) }
           >
@@ -125,7 +125,7 @@ export default function ProductCard({ product }) {
           />
           <Button
             className="btn btn-plus"
-            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+            data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
             onClick={ () => setProductQty(+productQty + 1) }
           >

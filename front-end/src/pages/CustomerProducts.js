@@ -32,6 +32,10 @@ const CustomerProductsContainer = styled(Container)`
     padding: 15px 30px
   }
 
+  .car-shop-btn:disabled {
+    background-color: var(--color-light-green);
+  }
+
   .total-value {
     color: var(--color-white);
     font-size: 20px;
@@ -74,13 +78,16 @@ export default function CustomerProducts() {
         ))}
       </ContainerCenter>
       <Button
-        data-testid="customer_products__checkout-bottom-value"
+        disabled={ totalValue <= 0 }
         className="car-shop-btn"
         onClick={ () => navigate('/customer/checkout') }
       >
         {'Ver Carrinho: R$ '}
-        <span className="total-value" data-testid="">
-          {totalValue.toFixed(2)}
+        <span
+          className="total-value"
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {totalValue > 0 ? totalValue.toFixed(2).replace('.', ',') : '0,00'}
         </span>
       </Button>
     </CustomerProductsContainer>
