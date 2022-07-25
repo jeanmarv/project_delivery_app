@@ -1,5 +1,4 @@
 const regex = /\S+@\S+\.\w{2,3}/;
-const { verifyToken } = require('../token/token');
 
 function validateEmail(request, response, next) {
   const { email } = request.body;
