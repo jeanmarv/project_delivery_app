@@ -1,13 +1,13 @@
 const axios = require('axios');
 
+const URL = 'http://localhost:3001';
+
 function getToken() {
   const user = JSON.parse(localStorage.getItem('user'));
   if (user) {
     axios.defaults.headers.common.Authorization = user.token;
   }
 }
-
-const URL = 'http://localhost:3001';
 
 export async function login(body) {
   return axios.post(`${URL}/login`, body)

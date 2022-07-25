@@ -21,7 +21,7 @@ const HeaderContainer = styled(Container)`
     background-color: var(--color-light-green);
   }
 
-  .my-requests-btn {
+  .btn {
     width: 20vw;
     font-weight: 500;
     height: 100%;
@@ -56,7 +56,7 @@ const HeaderContainer = styled(Container)`
 `;
 
 export default function Header() {
-  const { user, resetUser } = useContext(GlobalContext);
+  const { user, resetUser, navigate } = useContext(GlobalContext);
 
   const handleLogout = () => {
     resetUser();
@@ -70,16 +70,42 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <ContainerCenter className="role">
-        {role()}
-      </ContainerCenter>
-      <Button className="my-requests-btn">
-        {user.role === 'customer' && 'MEUS PEDIDOS'}
-      </Button>
-      <ContainerCenter className="username">
+      {user.role === 'customer' ? (
+        <>
+          <Button
+            className="btn"
+            data-testid="customer_products__element-navbar-link-products"
+            onClick={ () => navigate('/customer/products') }
+          >
+            PRODUTOS
+          </Button>
+          <Button
+            className="btn"
+            data-testid="customer_products__element-navbar-link-orders"
+          >
+            MEUS PEDIDOS
+          </Button>
+        </>
+      ) : (
+        <ContainerCenter
+          data-testid="customer_products__element-navbar-link-orders"
+          className="role"
+        >
+          {role()}
+        </ContainerCenter>
+      )}
+      <ContainerCenter
+        className="username"
+        data-testid="customer_products__element-navbar-user-full-name"
+      >
         {user.name.length === 0 ? 'User' : user.name}
       </ContainerCenter>
-      <Button className="exit-btn" type="button" onClick={ handleLogout }>
+      <Button
+        className="exit-btn"
+        type="button"
+        onClick={ handleLogout }
+        data-testid="customer_products__element-navbar-link-logout"
+      >
         Sair
       </Button>
     </HeaderContainer>

@@ -31,6 +31,7 @@
     "web-vitals": "2.1.4"
   },
   "devDependencies": {
+    "@types/styled-components": "^5.1.25",
     "eslint-config-trybe-frontend": "1.2.3",
     "prop-types": "^15.8.1",
     "react-router-prop-types": "^1.0.5",

@@ -25,7 +25,9 @@ export function GlobalProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(defaultUser);
   const [newUser, setNewUser] = useState(createUser);
+  const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
+  const [totalValue, setTotalValue] = useState(0);
 
   const resetUser = () => {
     setUser(defaultUser);
@@ -48,6 +50,10 @@ export function GlobalProvider({ children }) {
         resetUser,
         resetFormUser,
         navigate,
+        products,
+        setProducts,
+        totalValue,
+        setTotalValue,
       } }
     >
       {children}
