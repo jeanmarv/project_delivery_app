@@ -80,12 +80,14 @@ export default function ProductCard({ product }) {
     products[product.id - 1] = productInfo;
     setProducts(products);
 
+    if (product.quantity < 0) setProductQty(0);
+
     const value = products.reduce((total, pr) => {
       if (pr.quantity > 0) return total + (pr.quantity * parseFloat(pr.price));
       return total;
     }, 0);
     setTotalValue(value);
-  }, [product.id, products, productQty, setProducts, setTotalValue]);
+  }, [product, products, productQty, setProducts, setTotalValue]);
 
   return (
     <ProductCardContainer>
@@ -143,5 +145,6 @@ ProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
+    quantity: PropTypes.number.isRequired,
   }).isRequired,
 };

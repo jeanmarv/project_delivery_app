@@ -79,6 +79,7 @@ export default function CustomerProducts() {
       </ContainerCenter>
       <Button
         disabled={ totalValue <= 0 }
+        data-testid="customer_products__button-cart"
         className="car-shop-btn"
         onClick={ () => navigate('/customer/checkout') }
       >

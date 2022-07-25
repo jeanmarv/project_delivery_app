@@ -5,6 +5,7 @@ import Container from '../components/base/Container';
 import Header from '../components/Header';
 import GlobalContext from '../context/GlobalContext';
 import ContainerCenter from '../components/base/ContainerCenter';
+import CheckoutTable from '../components/CheckoutTable';
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;
@@ -19,7 +20,7 @@ const CustomerProductsContainer = styled(Container)`
 
 export default function CustomerProducts() {
   const {
-    user, resetUser, totalValue,
+    user, resetUser,
   } = useContext(GlobalContext);
 
   if (user.role !== 'customer') {
@@ -32,7 +33,7 @@ export default function CustomerProducts() {
       <Header />
       <ContainerCenter className="ahh">
         <h1>Finalizar Pedido</h1>
-        <p>{totalValue}</p>
+        <CheckoutTable />
       </ContainerCenter>
     </CustomerProductsContainer>
   );
