@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import GlobalContext from '../context/GlobalContext';
 import ContainerCenter from '../components/base/ContainerCenter';
 import CheckoutTable from '../components/CheckoutTable';
+import CheckoutForm from '../components/CheckoutForm';
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;
@@ -37,8 +38,12 @@ export default function CustomerProducts() {
         <CheckoutTable />
         <h1>
           {'Total: R$ '}
-          <span>{totalValue.toFixed(2).replace('.', ',')}</span>
+          <span className="customer_checkout__element-order-total-price">
+            {totalValue.toFixed(2).replace('.', ',')}
+          </span>
         </h1>
+        <h1>Detalhes e Endereço para Entrega</h1>
+        <CheckoutForm />
       </ContainerCenter>
     </CustomerProductsContainer>
   );
