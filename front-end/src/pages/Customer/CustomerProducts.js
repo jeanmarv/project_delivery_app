@@ -70,7 +70,6 @@ export default function CustomerProducts() {
         {products && products.map((product) => (
           <ProductCard
             key={ product.id }
-            data-testid={ `customer_products__element-card-price-${product.id}` }
             product={ product }
           >
             {product.name}
