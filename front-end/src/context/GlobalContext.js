@@ -25,9 +25,7 @@ export function GlobalProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(defaultUser);
   const [newUser, setNewUser] = useState(createUser);
-  const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
-  const [totalValue, setTotalValue] = useState(0);
 
   const resetUser = () => {
     setUser(defaultUser);
@@ -42,18 +40,14 @@ export function GlobalProvider({ children }) {
     <GlobalContext.Provider
       value={ {
         user,
-        setUser,
-        newUser,
-        setNewUser,
         error,
+        newUser,
+        setUser,
+        navigate,
         setError,
         resetUser,
+        setNewUser,
         resetFormUser,
-        navigate,
-        products,
-        setProducts,
-        totalValue,
-        setTotalValue,
       } }
     >
       {children}

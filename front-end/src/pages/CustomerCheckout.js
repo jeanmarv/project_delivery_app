@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
 import Container from '../components/base/Container';
@@ -7,6 +7,7 @@ import GlobalContext from '../context/GlobalContext';
 import ContainerCenter from '../components/base/ContainerCenter';
 import CheckoutTable from '../components/CheckoutTable';
 import CheckoutForm from '../components/CheckoutForm';
+import ProductContext from '../context/ProductContext';
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;
@@ -21,9 +22,19 @@ const CustomerProductsContainer = styled(Container)`
 `;
 
 export default function CustomerProducts() {
-  const {
-    user, resetUser, totalValue,
-  } = useContext(GlobalContext);
+  const [totalValue, setTotalValue] = useState(0);
+
+  const { user, resetUser } = useContext(GlobalContext);
+  const { cart } = useContext(ProductContext);
+
+  useEffect(() => {
+    setTotalValue(
+      cart.reduce((total, { subTotal }) => {
+        if (subTotal > 0) return total + parseFloat(subTotal);
+        return total;
+      }, 0),
+    );
+  }, [cart, setTotalValue]);
 
   if (user.role !== 'customer') {
     resetUser();
