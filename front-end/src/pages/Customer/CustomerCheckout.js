@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
-import Container from '../components/base/Container';
-import Header from '../components/Header';
-import GlobalContext from '../context/GlobalContext';
-import ContainerCenter from '../components/base/ContainerCenter';
-import CheckoutTable from '../components/CheckoutTable';
-import CheckoutForm from '../components/CheckoutForm';
-import ProductContext from '../context/ProductContext';
+import Container from '../../components/base/Container';
+import Header from '../../components/Header';
+import GlobalContext from '../../context/GlobalContext';
+import ContainerCenter from '../../components/base/ContainerCenter';
+import CheckoutTable from '../../components/CheckoutTable';
+import CheckoutForm from '../../components/CheckoutForm';
+import ProductContext from '../../context/ProductContext';
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;

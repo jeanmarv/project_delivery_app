@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import CustomerProducts from '../CustomerProducts';
-import CustomerCheckout from '../CustomerCheckout';
+import CustomerProducts from './CustomerProducts';
+import CustomerCheckout from './CustomerCheckout';
 import { ProductProvider } from '../../context/ProductContext';
 
 export default function CustomerPage() {
