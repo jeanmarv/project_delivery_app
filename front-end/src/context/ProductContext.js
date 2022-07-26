@@ -1,50 +1,52 @@
 import React, { createContext, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { getProducts } from '../api/requests';
+import { getProducts, getSellers } from '../api/requests';
 
 const ProductContext = createContext();
 
 export default ProductContext;
 
 export function ProductProvider({ children }) {
-  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
+  const [sellers, setSellers] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    async function fetchProducts() {
-      const request = await getProducts();
-      if (request.error) return;
-      setProducts(request);
+    async function fetchAPI() {
+      const productReq = await getProducts();
+      if (productReq.error) return;
+      setProducts(
+        productReq.map((product) => ({
+          ...product, quantity: 0, subTotal: 0,
+        })),
+      );
+
+      const sellersReq = await getSellers();
+      if (productReq.error) return;
+      setSellers(sellersReq);
     }
-    fetchProducts();
-  }, [cart]);
+    fetchAPI();
+  }, []);
 
   const addOnCart = (product, productQuantity) => {
-    product.quantity = productQuantity;
-    product.subTotal = +productQuantity * +product.price;
-    products[product.id - 1] = product;
+    const { id, price } = product;
+    products[id - 1] = {
+      ...product,
+      quantity: +productQuantity || 0,
+      subTotal: (productQuantity * +price || 0).toFixed(2),
+    };
+    setProducts(products);
 
-    setCart(
-      products.filter(({ quantity }) => quantity > 0),
-    );
+    setCart(products.filter(({ quantity }) => quantity > 0));
   };
 
   const removeOfTheCart = (id) => {
-    setCart(
-      cart.filter((product) => product.id !== id),
-    );
+    setCart(cart.filter((product) => product.id !== id));
   };
 
   return (
     <ProductContext.Provider
-      value={ {
-        cart,
-        setCart,
-        products,
-        addOnCart,
-        setProducts,
-        removeOfTheCart,
-      } }
+      value={ { cart, sellers, products, addOnCart, removeOfTheCart } }
     >
       {children}
     </ProductContext.Provider>

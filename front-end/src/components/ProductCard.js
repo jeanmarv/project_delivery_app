@@ -74,11 +74,7 @@ export default function ProductCard({ product }) {
 
   const { addOnCart } = useContext(ProductContext);
 
-  useEffect(() => {
-    if (productQuantity < 0) setProductQuantity(0);
-
-    addOnCart(product, productQuantity);
-  }, [productQuantity, product]);
+  useEffect(() => { addOnCart(product, productQuantity); }, [productQuantity]);
 
   return (
     <ProductCardContainer>
@@ -105,13 +101,19 @@ export default function ProductCard({ product }) {
             className="btn btn-minus"
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
-            onClick={ () => setProductQuantity(+productQuantity - 1) }
+            onClick={ () => {
+              if (productQuantity <= 0) return;
+              setProductQuantity(+productQuantity - 1);
+            } }
           >
             -
           </Button>
           <Input
             type="number"
-            onChange={ ({ target }) => setProductQuantity(target.value) }
+            onChange={ ({ target }) => {
+              if (target.valeu < 0) setProductQuantity(0);
+              setProductQuantity(target.value);
+            } }
             value={ productQuantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
             className="input-productQuantity"
@@ -120,7 +122,10 @@ export default function ProductCard({ product }) {
             className="btn btn-plus"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
-            onClick={ () => setProductQuantity(+productQuantity + 1) }
+            onClick={ () => {
+              if (productQuantity < 0) return;
+              setProductQuantity(+productQuantity + 1);
+            } }
           >
             +
           </Button>

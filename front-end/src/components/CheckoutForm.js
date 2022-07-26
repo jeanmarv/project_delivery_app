@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
-// import GlobalContext from '../context/GlobalContext';
+import React, { useContext, useState } from 'react';
+import ProductContext from '../context/ProductContext';
 
 export default function CheckoutForm() {
+  const { sellers } = useContext(ProductContext);
+
   const [address, setAddress] = useState({
-    seller: '',
+    seller: sellers[0].name,
     address: '',
     addressNumber: 0,
   });
@@ -14,14 +16,18 @@ export default function CheckoutForm() {
 
   return (
     <form>
-      {/* <label htmlFor="name">
+      <label htmlFor="name">
         P. Vendedora Responsável
         <select
-          onChange={ ({ target }) => setAddress({ ...address, role: target.value }) }
+          onChange={ ({ target }) => setAddress({ ...address, seller: target.value }) }
           data-testid="customer_checkout__select-seller"
+          value={ address.seller }
         >
+          {sellers && sellers.map(({ id, name }) => (
+            <option key={ id } default>{name}</option>
+          ))}
         </select>
-      </label> */}
+      </label>
       <label htmlFor="email">
         Endereço
         <input
