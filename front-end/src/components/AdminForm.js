@@ -28,10 +28,10 @@ export default function AdminForm() {
   const passlength = 6;
   const namelength = 12;
   const validEmail = /\S+@\S+\.\S+/;
-  const disableButton = validEmail.test(user.email)
-    && user.password.length >= passlength
-    && user.name.length > namelength
-    && user.role !== undefined;
+  const disableButton = validEmail.test(newUser.email)
+    && newUser.password.length >= passlength
+    && newUser.name.length >= namelength
+    && newUser.role !== undefined;
 
   return (
     <form>
