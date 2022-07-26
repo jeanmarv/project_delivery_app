@@ -28,6 +28,27 @@ export async function getProducts() {
     .catch((err) => ({ error: err.response.data.message }));
 }
 
+export async function getSellerOrders() {
+  getToken();
+  return axios.get(`${$URL}/seller/orders`)
+    .then(({data}) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
+export async function getSellerOrderById(id) {
+  getToken();
+  return axios.get(`${$URL}/seller/orders/${id}`)
+    .then(({data}) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
+export async function updateSellerOrder(id, body) {
+  getToken();
+  return axios.get(`${$URL}/seller/orders/${id}`, body)
+    .then(({data}) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
 export async function getUsers() {
   getToken();
   return axios.get(`${URL}/admin/manage`)
