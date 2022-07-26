@@ -13,7 +13,8 @@ const getAll = async () => {
 const register = async ({ name, email, password, role }) => {
   const hashPassword = md5(password);
   const findByEmail = await User.findOne({ where: { email } });
-  if (findByEmail) return null;
+  const findByName = await User.findOne({ where: { name } });
+  if (findByEmail || findByName) return null;
   await User.create({ name, email, password: hashPassword, role });
   return { name, email, role };
 };
