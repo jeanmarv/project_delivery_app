@@ -74,7 +74,10 @@ export default function ProductCard({ product }) {
 
   const { addOnCart } = useContext(ProductContext);
 
-  useEffect(() => { addOnCart(product, productQuantity); }, [productQuantity]);
+  useEffect(() => {
+    if (Number.isNaN(productQuantity)) setProductQuantity(0);
+    addOnCart(product, productQuantity);
+  }, [productQuantity]);
 
   return (
     <ProductCardContainer>
@@ -109,11 +112,8 @@ export default function ProductCard({ product }) {
             -
           </Button>
           <Input
-            type="number"
-            onChange={ ({ target }) => {
-              if (target.valeu < 0) setProductQuantity(0);
-              setProductQuantity(target.value);
-            } }
+            type="text"
+            onChange={ ({ target }) => setProductQuantity(Number(target.value)) }
             value={ productQuantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
             className="input-productQuantity"
