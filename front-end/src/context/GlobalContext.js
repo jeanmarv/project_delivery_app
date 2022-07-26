@@ -28,6 +28,7 @@ export function GlobalProvider({ children }) {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
   const [totalValue, setTotalValue] = useState(0);
+  const [sellerOrders, setSellerOrders] = useState([]);
 
   const resetUser = () => {
     setUser(defaultUser);
@@ -54,6 +55,8 @@ export function GlobalProvider({ children }) {
         setProducts,
         totalValue,
         setTotalValue,
+        sellerOrders,
+        setSellerOrders,
       } }
     >
       {children}
