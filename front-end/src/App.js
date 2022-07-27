@@ -2,8 +2,9 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import AdminManage from './pages/AdminManage';
-import CustomerProducts from './pages/CustomerProducts';
-import CustomerCheckout from './pages/CustomerCheckout';
+import CustomerPage from './pages/Customer';
+// import CustomerProducts from './pages/CustomerProducts';
+// import CustomerCheckout from './pages/CustomerCheckout';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -16,8 +17,7 @@ function App() {
       <Route path="/login" element={ <Login /> } />
       <Route path="/register" element={ <Register /> } />
       <Route path="/seller/orders" element={ <SellerOrders /> } />
-      <Route path="/customer/products" element={ <CustomerProducts /> } />
-      <Route path="/customer/checkout" element={ <CustomerCheckout /> } />
+      <Route path="/customer/*" element={ <CustomerPage /> } />
       <Route path="/admin/manage" element={ <AdminManage /> } />
     </Routes>
   );

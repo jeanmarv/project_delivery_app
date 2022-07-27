@@ -1,3 +1,4 @@
+const { now } = require('moment');
 const {
   Sales,
   Products,
@@ -8,8 +9,10 @@ const {
 const createSales = async (body) => {
   const {
     totalPrice, deliveryAddress, status, deliveryNumber, userId, sellerId, productsSale } = body;
+
   const sale = await Sales.create({
-    totalPrice, deliveryAddress, deliveryNumber, status, userId, sellerId, productsSale });
+    totalPrice, deliveryAddress, deliveryNumber, status, userId, sellerId, saleDate: now() });
+
   await Promise.all(
     productsSale.map(async (product) => {
       const { id, quantity } = product;
