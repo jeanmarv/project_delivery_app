@@ -1,14 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import PropTypes, { number, string } from 'prop-types';
 import styled from 'styled-components';
 import ContainerCenter from './base/ContainerCenter';
 import Button from './base/Button';
 import Input from './base/Input';
-import GlobalContext from '../context/GlobalContext';
+import ProductContext from '../context/ProductContext';
 
 const ProductCardContainer = styled(ContainerCenter)`
   flex-direction: column;
-  width: 400px;
+  width: 8%;
   margin: 20px;
   border: 1px solid var(--color-medium-gray);
 
@@ -25,11 +25,11 @@ const ProductCardContainer = styled(ContainerCenter)`
   }
 
   img {
-    height: 350px;
+    height: 10px;
   }
 
   .footer-infos {
-    height: 150px;
+    height: 100%;
     flex-direction: column;
     background-color: var(--color-light-gray);
     width: 100%;
@@ -40,12 +40,12 @@ const ProductCardContainer = styled(ContainerCenter)`
     margin-bottom: 15px;
   }
 
-  .input-productQty {
+  .input-productQuantity {
     border-radius: 0;
     font-weight: 700;
     font-size: 24px;
     text-align: center;
-    width: 75px;
+    width: 100%;
   }
 
   .btn {
@@ -55,7 +55,7 @@ const ProductCardContainer = styled(ContainerCenter)`
     font-size: 24px;
     border-radius: 0;
     border: 1px solid var(--color-main-green);
-    width: 50px;
+    width: 100%;
   }
 
   .btn-plus {
@@ -70,24 +70,15 @@ const ProductCardContainer = styled(ContainerCenter)`
 `;
 
 export default function ProductCard({ product }) {
-  const [productQty, setProductQty] = useState(0);
+  const [productQuantity, setProductQuantity] = useState(0);
 
-  const { products, setProducts, setTotalValue } = useContext(GlobalContext);
+  const { addOnCart } = useContext(ProductContext);
 
   useEffect(() => {
-    const productInfo = products[product.id - 1];
-    productInfo.quantity = productQty;
-    products[product.id - 1] = productInfo;
-    setProducts(products);
-
-    if (product.quantity < 0) setProductQty(0);
-
-    const value = products.reduce((total, pr) => {
-      if (pr.quantity > 0) return total + (pr.quantity * parseFloat(pr.price));
-      return total;
-    }, 0);
-    setTotalValue(value);
-  }, [product, products, productQty, setProducts, setTotalValue]);
+    if (Number.isNaN(productQuantity)
+      || productQuantity === undefined) setProductQuantity(0);
+    addOnCart(product, productQuantity);
+  }, [productQuantity]);
 
   return (
     <ProductCardContainer>
@@ -114,22 +105,25 @@ export default function ProductCard({ product }) {
             className="btn btn-minus"
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
             type="button"
-            onClick={ () => setProductQty(+productQty - 1) }
+            onClick={ () => {
+              if (productQuantity <= 0) return;
+              setProductQuantity(+productQuantity - 1);
+            } }
           >
             -
           </Button>
           <Input
-            type="number"
-            onChange={ ({ target }) => setProductQty(target.value) }
-            value={ productQty }
+            type="text"
+            onChange={ (e) => setProductQuantity(Number(e.target.value)) }
+            value={ productQuantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            className="input-productQty"
+            className="input-productQuantity"
           />
           <Button
             className="btn btn-plus"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
-            onClick={ () => setProductQty(+productQty + 1) }
+            onClick={ () => setProductQuantity(+productQuantity + 1) }
           >
             +
           </Button>
@@ -145,6 +139,7 @@ ProductCard.propTypes = {
     name: PropTypes.string.isRequired,
     price: PropTypes.string.isRequired,
     urlImage: PropTypes.string.isRequired,
-    quantity: PropTypes.number,
+    quantity: PropTypes.oneOfType([number, string]),
+    subTotal: PropTypes.oneOfType([number, string]),
   }).isRequired,
 };

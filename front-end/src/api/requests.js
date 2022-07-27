@@ -48,3 +48,17 @@ export async function deleteUser(body) {
     .then(({ data }) => data)
     .catch((err) => ({ error: err.response.data.message }));
 }
+
+export async function getSellers() {
+  getToken();
+  return axios.get(`${URL}/seller`)
+    .then(({ data }) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
+export async function createSale(body) {
+  getToken();
+  return axios.post(`${URL}/seller/orders`, body)
+    .then(({ data }) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
