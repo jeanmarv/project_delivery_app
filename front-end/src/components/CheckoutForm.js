@@ -1,17 +1,41 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { createSale } from '../api/requests';
+import GlobalContext from '../context/GlobalContext';
 import ProductContext from '../context/ProductContext';
 
 export default function CheckoutForm() {
-  const { sellers } = useContext(ProductContext);
+  const [totalPrice, setTotalValue] = useState(0);
+  const { user, navigate } = useContext(GlobalContext);
+  const { sellers, cart } = useContext(ProductContext);
+
+  useEffect(() => {
+    setTotalValue(
+      cart.reduce((total, { subTotal }) => {
+        if (subTotal > 0) return total + parseFloat(subTotal);
+        return total;
+      }, 0),
+    );
+  }, [cart, setTotalValue]);
 
   const [address, setAddress] = useState({
-    seller: sellers[0].name,
-    address: '',
-    addressNumber: 0,
+    sellerId: sellers[0].id,
+    deliveryAddress: '',
+    deliveryNumber: '',
   });
 
   const handleClick = async () => {
-    console.log('Oi');
+    const request = await createSale({
+      totalPrice: totalPrice.toFixed(2),
+      status: 'Pendente',
+      ...address,
+      userId: user.id,
+      productsSale: cart,
+    });
+
+    console.log(request);
+
+    if (request.error) return;
+    navigate(`/customer/orders/${request.id}`);
   };
 
   return (
@@ -19,12 +43,12 @@ export default function CheckoutForm() {
       <label htmlFor="name">
         P. Vendedora Responsável
         <select
-          onChange={ ({ target }) => setAddress({ ...address, seller: target.value }) }
+          onChange={ ({ target }) => setAddress({ ...address, sellerId: target.value }) }
           data-testid="customer_checkout__select-seller"
-          value={ address.seller }
+          value={ address.sellerId }
         >
           {sellers && sellers.map(({ id, name }) => (
-            <option key={ id } default>{name}</option>
+            <option key={ id } value={ id } default>{name}</option>
           ))}
         </select>
       </label>
@@ -33,9 +57,11 @@ export default function CheckoutForm() {
         <input
           type="text"
           placeholder="Av. A, Bairro B"
-          value={ address.address }
+          value={ address.deliveryAddress }
           data-testid="customer_checkout__input-address"
-          onChange={ ({ target }) => setAddress({ ...address, email: target.value }) }
+          onChange={
+            ({ target }) => setAddress({ ...address, deliveryAddress: target.value })
+          }
         />
       </label>
       <label htmlFor="password">
@@ -43,9 +69,11 @@ export default function CheckoutForm() {
         <input
           type="number"
           placeholder="10"
-          value={ address.addressNumber }
+          value={ address.deliveryNumber }
           data-testid="customer_checkout__input-addressNumber"
-          onChange={ ({ target }) => setAddress({ ...address, password: target.value }) }
+          onChange={
+            ({ target }) => setAddress({ ...address, deliveryNumber: target.value })
+          }
         />
       </label>
       <button

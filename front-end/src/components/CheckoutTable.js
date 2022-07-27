@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductContext from '../context/ProductContext';
 
 export default function CheckoutTable() {
+  const [show, setShow] = useState([]);
+
   const { cart, removeOfTheCart } = useContext(ProductContext);
+
+  useEffect(() => { setShow(cart); }, [cart]);
 
   return (
     <table>
@@ -17,7 +21,7 @@ export default function CheckoutTable() {
         </tr>
       </thead>
       <tbody>
-        {cart.map((product, index) => {
+        {show && show.map((product, index) => {
           const { id, name: description, quantity, price } = product;
           if (quantity > 0) {
             return (
@@ -27,7 +31,7 @@ export default function CheckoutTable() {
                     `customer_checkout__element-order-table-item-number-${index}`
                   }
                 >
-                  { id }
+                  { index + 1 }
                 </td>
                 <td
                   data-testid={ `customer_checkout__element-order-table-name-${index}` }

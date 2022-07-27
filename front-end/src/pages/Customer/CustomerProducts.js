@@ -30,7 +30,7 @@ const CustomerProductsContainer = styled(Container)`
     font-weight: 500;
     z-index: 10;
     padding: 15px 30px
-  }
+   }
 
   .car-shop-btn:disabled {
     background-color: var(--color-light-green);

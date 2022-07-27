@@ -49,7 +49,7 @@ export default function CustomerProducts() {
         <CheckoutTable />
         <h1>
           {'Total: R$ '}
-          <span className="customer_checkout__element-order-total-price">
+          <span data-testid="customer_checkout__element-order-total-price">
             {totalValue.toFixed(2).replace('.', ',')}
           </span>
         </h1>

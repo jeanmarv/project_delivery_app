@@ -8,7 +8,7 @@ import ProductContext from '../context/ProductContext';
 
 const ProductCardContainer = styled(ContainerCenter)`
   flex-direction: column;
-  width: 400px;
+  width: 8%;
   margin: 20px;
   border: 1px solid var(--color-medium-gray);
 
@@ -25,11 +25,11 @@ const ProductCardContainer = styled(ContainerCenter)`
   }
 
   img {
-    height: 350px;
+    height: 10px;
   }
 
   .footer-infos {
-    height: 150px;
+    height: 100%;
     flex-direction: column;
     background-color: var(--color-light-gray);
     width: 100%;
@@ -45,7 +45,7 @@ const ProductCardContainer = styled(ContainerCenter)`
     font-weight: 700;
     font-size: 24px;
     text-align: center;
-    width: 75px;
+    width: 100%;
   }
 
   .btn {
@@ -55,7 +55,7 @@ const ProductCardContainer = styled(ContainerCenter)`
     font-size: 24px;
     border-radius: 0;
     border: 1px solid var(--color-main-green);
-    width: 50px;
+    width: 100%;
   }
 
   .btn-plus {
@@ -75,7 +75,8 @@ export default function ProductCard({ product }) {
   const { addOnCart } = useContext(ProductContext);
 
   useEffect(() => {
-    if (Number.isNaN(productQuantity)) setProductQuantity(0);
+    if (Number.isNaN(productQuantity)
+      || productQuantity === undefined) setProductQuantity(0);
     addOnCart(product, productQuantity);
   }, [productQuantity]);
 
@@ -113,7 +114,7 @@ export default function ProductCard({ product }) {
           </Button>
           <Input
             type="text"
-            onChange={ ({ target }) => setProductQuantity(Number(target.value)) }
+            onChange={ (e) => setProductQuantity(Number(e.target.value)) }
             value={ productQuantity }
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
             className="input-productQuantity"
@@ -122,10 +123,7 @@ export default function ProductCard({ product }) {
             className="btn btn-plus"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
             type="button"
-            onClick={ () => {
-              if (productQuantity < 0) return;
-              setProductQuantity(+productQuantity + 1);
-            } }
+            onClick={ () => setProductQuantity(+productQuantity + 1) }
           >
             +
           </Button>

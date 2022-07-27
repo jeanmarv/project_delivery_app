@@ -30,14 +30,15 @@ export function ProductProvider({ children }) {
 
   const addOnCart = (product, productQuantity) => {
     const { id, price } = product;
-    products[id - 1] = {
+    const newProducts = [...products];
+    newProducts[id - 1] = {
       ...product,
       quantity: +productQuantity || 0,
       subTotal: (productQuantity * +price || 0).toFixed(2),
     };
-    setProducts(products);
+    setProducts(newProducts);
 
-    setCart(products.filter(({ quantity }) => quantity > 0));
+    setCart(newProducts.filter(({ quantity }) => quantity > 0));
   };
 
   const removeOfTheCart = (id) => {
