@@ -18,8 +18,10 @@ const createSalesController = async (req, res) => {
 
 const getAllSalesController = async (req, res) => {
   try {
-    const { email } = req.body;
-    const sales = await getAllSales(email);
+    const { sellerId } = req.query;
+
+    console.log(req.query);
+    const sales = await getAllSales(sellerId);
     res.status(200).json(sales);
   } catch (error) {
     console.log(error);
