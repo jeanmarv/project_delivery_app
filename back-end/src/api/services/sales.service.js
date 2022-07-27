@@ -3,7 +3,6 @@ const {
   Sales,
   Products,
   SalesProducts,
-  User,
 } = require('../../database/models');
 
 const createSales = async (body) => {
@@ -27,10 +26,16 @@ const createSales = async (body) => {
   return sale.dataValues;
 };
 
-const getAllSales = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const getAllSellersSales = async (sellerId) => {
   const sales = await Sales.findAll({
-    where: { sellerId: user.id },
+    where: { sellerId },
+  });
+  return sales;
+};
+
+const getAllCustumerSales = async (userId) => {
+  const sales = await Sales.findAll({
+    where: { userId },
   });
   return sales;
 };
@@ -55,7 +60,8 @@ const updateStatusSales = async (id, status) => {
 
 module.exports = {
   createSales,
-  getAllSales,
+  getAllSellersSales,
+  getAllCustumerSales,
   getSalesById,
   updateStatusSales,
 };
