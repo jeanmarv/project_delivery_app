@@ -36,6 +36,7 @@ const getAllCustumerSalesController = async (req, res) => {
 
     console.log(req.query);
     const sales = await getAllCustumerSales(userId);
+
     res.status(200).json(sales);
   } catch (error) {
     console.log(error);

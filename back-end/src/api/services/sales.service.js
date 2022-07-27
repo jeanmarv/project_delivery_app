@@ -26,6 +26,7 @@ const createSales = async (body) => {
   return sale.dataValues;
 };
 
+
 const getAllSellersSales = async (sellerId) => {
   const sales = await Sales.findAll({
     where: { sellerId },
@@ -36,6 +37,7 @@ const getAllSellersSales = async (sellerId) => {
 const getAllCustumerSales = async (userId) => {
   const sales = await Sales.findAll({
     where: { userId },
+
   });
   return sales;
 };
