@@ -28,9 +28,23 @@ export async function getProducts() {
     .catch((err) => ({ error: err.response.data.message }));
 }
 
-export async function getSellerOrders(email) {
+export async function getCustomerOrders(userId) {
   getToken();
-  return axios.get(`${URL}/seller/orders`, { email })
+  return axios.get(`${URL}/customer/orders`, { params: { userId } })
+    .then(({ data }) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
+export async function getCustomerOrdersById(id) {
+  getToken();
+  return axios.get(`${URL}/customer/orders/${id}`)
+    .then(({ data }) => data)
+    .catch((err) => ({ error: err.response.data.message }));
+}
+
+export async function getSellerOrders(sellerId) {
+  getToken();
+  return axios.get(`${URL}/seller/orders`, { params: { sellerId } })
     .then(({ data }) => data)
     .catch((err) => ({ error: err.response.data.message }));
 }
@@ -44,7 +58,7 @@ export async function getSellerOrderById(id) {
 
 export async function updateSellerOrder(id, body) {
   getToken();
-  return axios.get(`${URL}/seller/orders/${id}`, body)
+  return axios.put(`${URL}/seller/orders/${id}`, body)
     .then(({ data }) => data)
     .catch((err) => ({ error: err.response.data.message }));
 }

@@ -3,7 +3,6 @@ const {
   Sales,
   Products,
   SalesProducts,
-  User,
 } = require('../../database/models');
 
 const createSales = async (body) => {
@@ -27,10 +26,9 @@ const createSales = async (body) => {
   return sale.dataValues;
 };
 
-const getAllSales = async (email) => {
-  const user = await User.findOne({ where: { email } });
+const getAllSales = async (sellerId) => {
   const sales = await Sales.findAll({
-    where: { sellerId: user.id },
+    where: { sellerId },
   });
   return sales;
 };
