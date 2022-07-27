@@ -1,22 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import GlobalContext from '../context/GlobalContext';
+import ProductContext from '../context/ProductContext';
 
 export default function CheckoutTable() {
-  const [carShop, setCarShop] = useState([]);
+  const [show, setShow] = useState([]);
 
-  const { products, setProducts } = useContext(GlobalContext);
+  const { cart, removeOfTheCart } = useContext(ProductContext);
 
-  useEffect(() => {
-    const ahh = products.filter(({ quantity }) => quantity > 0);
-    setCarShop(ahh);
-  }, [products, setProducts]);
-
-  const handleClick = (id) => {
-    const ahh = products;
-    ahh[id - 1].quantity = 0;
-    console.log(ahh);
-    setProducts(ahh);
-  };
+  useEffect(() => { setShow(cart); }, [cart]);
 
   return (
     <table>
@@ -31,7 +21,7 @@ export default function CheckoutTable() {
         </tr>
       </thead>
       <tbody>
-        {carShop.map((product, index) => {
+        {show && show.map((product, index) => {
           const { id, name: description, quantity, price } = product;
           if (quantity > 0) {
             return (
@@ -41,7 +31,7 @@ export default function CheckoutTable() {
                     `customer_checkout__element-order-table-item-number-${index}`
                   }
                 >
-                  { id }
+                  { index + 1 }
                 </td>
                 <td
                   data-testid={ `customer_checkout__element-order-table-name-${index}` }
@@ -75,7 +65,7 @@ export default function CheckoutTable() {
                     data-testid={
                       `customer_checkout__element-order-table-remove-${index}`
                     }
-                    onClick={ () => handleClick(id) }
+                    onClick={ () => removeOfTheCart(id) }
                   >
                     Excluir
                   </button>

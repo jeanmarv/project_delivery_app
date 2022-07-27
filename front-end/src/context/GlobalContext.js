@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
 const defaultUser = {
+  id: '',
   name: '',
   password: '',
   token: '',
@@ -25,7 +26,6 @@ export function GlobalProvider({ children }) {
   const navigate = useNavigate();
   const [user, setUser] = useState(defaultUser);
   const [newUser, setNewUser] = useState(createUser);
-  const [products, setProducts] = useState([]);
   const [error, setError] = useState('');
   const [totalValue, setTotalValue] = useState(0);
   const [sellerOrders, setSellerOrders] = useState([]);
@@ -43,16 +43,14 @@ export function GlobalProvider({ children }) {
     <GlobalContext.Provider
       value={ {
         user,
-        setUser,
-        newUser,
-        setNewUser,
         error,
+        newUser,
+        setUser,
+        navigate,
         setError,
         resetUser,
+        setNewUser,
         resetFormUser,
-        navigate,
-        products,
-        setProducts,
         totalValue,
         setTotalValue,
         sellerOrders,

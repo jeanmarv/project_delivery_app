@@ -1,13 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Navigate } from 'react-router-dom';
-import { getProducts } from '../api/requests';
-import Container from '../components/base/Container';
-import ContainerCenter from '../components/base/ContainerCenter';
-import Header from '../components/Header';
-import GlobalContext from '../context/GlobalContext';
-import ProductCard from '../components/ProductCard';
-import Button from '../components/base/Button';
+import Container from '../../components/base/Container';
+import ContainerCenter from '../../components/base/ContainerCenter';
+import Header from '../../components/Header';
+import GlobalContext from '../../context/GlobalContext';
+import ProductCard from '../../components/ProductCard';
+import Button from '../../components/base/Button';
+import ProductContext from '../../context/ProductContext';
 
 const CustomerProductsContainer = styled(Container)`
   height: 100vh;
@@ -30,7 +30,7 @@ const CustomerProductsContainer = styled(Container)`
     font-weight: 500;
     z-index: 10;
     padding: 15px 30px
-  }
+   }
 
   .car-shop-btn:disabled {
     background-color: var(--color-light-green);
@@ -44,19 +44,19 @@ const CustomerProductsContainer = styled(Container)`
 `;
 
 export default function CustomerProducts() {
-  const {
-    user, resetUser, products, setProducts, totalValue, navigate,
-  } = useContext(GlobalContext);
+  const [totalValue, setTotalValue] = useState(0);
+
+  const { user, resetUser, navigate } = useContext(GlobalContext);
+  const { products, cart } = useContext(ProductContext);
 
   useEffect(() => {
-    async function fetchProducts() {
-      const request = await getProducts();
-      if (request.error) return;
-
-      setProducts(request);
-    }
-    fetchProducts();
-  }, [setProducts]);
+    setTotalValue(
+      cart.reduce((total, { subTotal }) => {
+        if (subTotal > 0) return total + parseFloat(subTotal);
+        return total;
+      }, 0),
+    );
+  }, [cart]);
 
   if (user.role !== 'customer') {
     resetUser();
@@ -70,7 +70,6 @@ export default function CustomerProducts() {
         {products && products.map((product) => (
           <ProductCard
             key={ product.id }
-            data-testid={ `customer_products__element-card-price-${product.id}` }
             product={ product }
           >
             {product.name}
