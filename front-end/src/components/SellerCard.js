@@ -28,8 +28,7 @@ export default function SellerCard({ order }) {
         </div>
         <div>
           <p data-testid={ `seller_orders__element-order-price-${id}` }>
-            R$:
-            { totalPrice }
+            { `R$:${totalPrice}` }
           </p>
         </div>
         <p data-testid={ `seller_orders__element-order-address-${id}` }>
