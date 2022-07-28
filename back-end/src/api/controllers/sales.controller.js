@@ -20,7 +20,6 @@ const createSalesController = async (req, res) => {
 const getAllSellerSalesController = async (req, res) => {
   try {
     const { sellerId } = req.query;
-
     const sales = await getAllSellersSales(sellerId);
     res.status(200).json(sales);
   } catch (error) {
@@ -32,10 +31,7 @@ const getAllSellerSalesController = async (req, res) => {
 const getAllCustumerSalesController = async (req, res) => {
   try {
     const { userId } = req.query;
-
-    console.log(req.query);
     const sales = await getAllCustumerSales(userId);
-
     res.status(200).json(sales);
   } catch (error) {
     console.log(error);

@@ -56,9 +56,9 @@ export async function getSellerOrderById(id) {
     .catch((err) => ({ error: err.response.data.message }));
 }
 
-export async function updateSellerOrder(id, body) {
+export async function updateSellerOrder(id) {
   getToken();
-  return axios.put(`${URL}/seller/orders/${id}`, body)
+  return axios.put(`${URL}/seller/orders/${id}`)
     .then(({ data }) => data)
     .catch((err) => ({ error: err.response.data.message }));
 }

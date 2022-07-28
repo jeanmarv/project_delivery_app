@@ -6,7 +6,7 @@ import ProductContext from '../context/ProductContext';
 export default function CheckoutForm() {
   const [totalPrice, setTotalValue] = useState(0);
   const { user, navigate } = useContext(GlobalContext);
-  const { sellers, cart } = useContext(ProductContext);
+  const { sellers, cart, setOrders } = useContext(ProductContext);
 
   useEffect(() => {
     setTotalValue(
@@ -32,9 +32,8 @@ export default function CheckoutForm() {
       productsSale: cart,
     });
 
-    console.log(request);
-
     if (request.error) return;
+    setOrders(request);
     navigate(`/customer/orders/${request.id}`);
   };
 
@@ -48,7 +47,7 @@ export default function CheckoutForm() {
           value={ address.sellerId }
         >
           {sellers && sellers.map(({ id, name }) => (
-            <option key={ id } value={ id } default>{name}</option>
+            <option key={ id } value={ id }>{name}</option>
           ))}
         </select>
       </label>

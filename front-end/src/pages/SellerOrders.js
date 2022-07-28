@@ -14,7 +14,7 @@ const SellerOrdersContainer = styled(ContainerCenter)`
 `;
 
 export default function SellerOrders() {
-  const { user, resetUser, sellerOrders, setSellerOrders } = useContext(GlobalContext);
+  const { user, sellerOrders, setSellerOrders } = useContext(GlobalContext);
 
   useEffect(() => {
     async function fetchOrders() {
@@ -27,7 +27,6 @@ export default function SellerOrders() {
   }, [setSellerOrders, user]);
 
   if (user.role !== 'seller') {
-    resetUser();
     return <Navigate to="/" />;
   }
 

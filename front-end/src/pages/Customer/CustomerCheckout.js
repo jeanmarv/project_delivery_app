@@ -24,7 +24,7 @@ const CustomerProductsContainer = styled(Container)`
 export default function CustomerProducts() {
   const [totalValue, setTotalValue] = useState(0);
 
-  const { user, resetUser } = useContext(GlobalContext);
+  const { user } = useContext(GlobalContext);
   const { cart } = useContext(ProductContext);
 
   useEffect(() => {
@@ -37,7 +37,6 @@ export default function CustomerProducts() {
   }, [cart, setTotalValue]);
 
   if (user.role !== 'customer') {
-    resetUser();
     return <Navigate to="/" />;
   }
 
