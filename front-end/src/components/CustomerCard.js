@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
+import { formatDate } from '../helpers/formatDate';
 
 export default function CustomerCard({ order }) {
   const {
@@ -9,8 +9,6 @@ export default function CustomerCard({ order }) {
     totalPrice,
     status,
     saleDate } = order;
-
-  const formatDate = (date) => moment(date).format('DD/MM/yyyy');
 
   return (
     <Link to={ `/customer/orders/${id}` }>

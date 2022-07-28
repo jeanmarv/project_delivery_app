@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { formatDate } from '../helpers/formatDate';
 
 export default function SellerCard({ order }) {
   const {
@@ -24,14 +25,19 @@ export default function SellerCard({ order }) {
           <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{ status }</p>
         </div>
         <div>
-          <p data-testid={ `seller_orders__element-order-date-${id}` }>{ saleDate }</p>
-        </div>
-        <div>
-          <p data-testid={ `seller_orders__element-order-price-${id}` }>
-            { `R$:${totalPrice}` }
+          <p data-testid={ `seller_orders__element-order-date-${id}` }>
+            { formatDate(saleDate) }
           </p>
         </div>
-        <p data-testid={ `seller_orders__element-order-address-${id}` }>
+        <div>
+          <p>
+            R$:
+            <span data-testid={ `seller_orders__element-card-price-${id}` }>
+              { totalPrice.replace('.', ',') }
+            </span>
+          </p>
+        </div>
+        <p data-testid={ `seller_orders__element-card-address-${id}` }>
           { `${deliveryAddress}, ${deliveryNumber}` }
         </p>
       </div>
