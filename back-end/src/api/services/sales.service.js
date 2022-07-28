@@ -26,9 +26,17 @@ const createSales = async (body) => {
   return sale.dataValues;
 };
 
-const getAllSales = async (sellerId) => {
+const getAllSellersSales = async (sellerId) => {
   const sales = await Sales.findAll({
     where: { sellerId },
+  });
+  return sales;
+};
+
+const getAllCustumerSales = async (userId) => {
+  const sales = await Sales.findAll({
+    where: { userId },
+
   });
   return sales;
 };
@@ -53,7 +61,8 @@ const updateStatusSales = async (id, status) => {
 
 module.exports = {
   createSales,
-  getAllSales,
+  getAllSellersSales,
+  getAllCustumerSales,
   getSalesById,
   updateStatusSales,
 };
