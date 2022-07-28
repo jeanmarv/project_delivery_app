@@ -56,8 +56,9 @@ export default function RegisterForm() {
       setError(request.error);
       return;
     }
-    await setUser({ ...user, ...request });
-    await setError('');
+    setUser({ ...user, ...request });
+    setError('');
+    localStorage.user = JSON.stringify(request);
     navigate('/');
   };
 
