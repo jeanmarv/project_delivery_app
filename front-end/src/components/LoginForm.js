@@ -50,9 +50,10 @@ export default function LoginForm() {
       setError(request.error);
       return;
     }
-    await setUser({ ...user, ...request });
-    await setError('');
-    localStorage.user = JSON.stringify(user);
+    console.log(request);
+    setUser({ ...user, ...request });
+    setError('');
+    localStorage.user = JSON.stringify(request);
     navigate('/');
   };
 
