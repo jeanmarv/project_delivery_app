@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ContainerCenter from '../components/base/ContainerCenter';
 import LoginForm from '../components/LoginForm';
@@ -17,6 +18,8 @@ const LoginContainer = styled(ContainerCenter)`
 
 export default function Login() {
   const { error } = useContext(GlobalContext);
+
+  if (localStorage.user) return <Navigate to="/" />;
 
   return (
     <LoginContainer>

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import moment from 'moment';
 
 export default function CustomerCard({ order }) {
   const {
@@ -8,6 +9,8 @@ export default function CustomerCard({ order }) {
     totalPrice,
     status,
     saleDate } = order;
+
+  const formatDate = (date) => moment(date).format('DD/MM/yyyy');
 
   return (
     <Link to={ `/customer/orders/${id}` }>
@@ -26,11 +29,16 @@ export default function CustomerCard({ order }) {
           </p>
         </div>
         <div>
-          <p data-testid={ `customer_orders__element-order-date-${id}` }>{ saleDate }</p>
+          <p data-testid={ `customer_orders__element-order-date-${id}` }>
+            { formatDate(saleDate) }
+          </p>
         </div>
         <div>
-          <p data-testid={ `customer_orders__element-order-price-${id}` }>
-            { `R$:${totalPrice}` }
+          <p>
+            R$:
+            <span data-testid={ `customer_orders__element-card-price-${id}` }>
+              { totalPrice.replace('.', ',') }
+            </span>
           </p>
         </div>
       </div>

@@ -23,7 +23,7 @@ const createSales = async (body) => {
       return productSale;
     }),
   );
-  return {...sale.dataValues, productsSale};
+  return { ...sale.dataValues, productsSale };
 };
 
 const getAllSellersSales = async (sellerId) => {

@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 
-const defaultUser = {
+const defaultUser = localStorage.user ? JSON.parse(localStorage.user) : {
   id: '',
   name: '',
   password: '',

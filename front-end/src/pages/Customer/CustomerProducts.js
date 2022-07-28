@@ -56,6 +56,7 @@ export default function CustomerProducts() {
         return total;
       }, 0),
     );
+    console.log(user);
   }, [cart]);
 
   if (user.role !== 'customer') {
