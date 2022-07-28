@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { formatDate } from '../helpers/formatDate';
+import formatDate from '../helpers/formatDate';
 
 export default function CustomerCard({ order }) {
   const {
