@@ -21,7 +21,6 @@ const getAllSellerSalesController = async (req, res) => {
   try {
     const { sellerId } = req.query;
 
-    console.log(req.query);
     const sales = await getAllSellersSales(sellerId);
     res.status(200).json(sales);
   } catch (error) {

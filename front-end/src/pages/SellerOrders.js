@@ -18,7 +18,7 @@ export default function SellerOrders() {
 
   useEffect(() => {
     async function fetchOrders() {
-      const request = await getSellerOrders(user.email);
+      const request = await getSellerOrders(user.id);
       if (request.error) return;
 
       setSellerOrders(request);

@@ -82,6 +82,7 @@ export default function Header() {
           <Button
             className="btn"
             data-testid="customer_products__element-navbar-link-orders"
+            onClick={ () => navigate('/customer/orders') }
           >
             MEUS PEDIDOS
           </Button>
