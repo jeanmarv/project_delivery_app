@@ -13,6 +13,7 @@ export default function CustomerOrders() {
   useEffect(() => {
     async function fetchOrders() {
       const request = await getCustomerOrders(user.id);
+      console.log(request);
       if (request.error) return;
 
       setCustomerOrders(request);
@@ -28,6 +29,11 @@ export default function CustomerOrders() {
   return (
     <>
       <Header />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div>
         {customerOrders && customerOrders.map((order) => (
           <CustomerCard
