@@ -1,3 +1,5 @@
-import moment from "moment";
+import moment from 'moment';
 
-export const formatDate = (date) => moment(date).format('DD/MM/yyyy');
+const formatDate = (date) => moment(date).format('DD/MM/yyyy');
+
+export default formatDate;
