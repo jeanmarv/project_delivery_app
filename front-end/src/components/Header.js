@@ -60,6 +60,7 @@ export default function Header() {
 
   const handleLogout = () => {
     resetUser();
+    navigate('/');
   };
 
   const role = () => {
