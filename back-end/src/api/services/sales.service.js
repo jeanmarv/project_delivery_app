@@ -3,7 +3,6 @@ const {
   Sales,
   Products,
   SalesProducts,
-  User,
 } = require('../../database/models');
 
 const createSales = async (body) => {
@@ -24,7 +23,7 @@ const createSales = async (body) => {
       return productSale;
     }),
   );
-  return sale.dataValues;
+  return {...sale.dataValues, productsSale};
 };
 
 const getAllSales = async (sellerId) => {

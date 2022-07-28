@@ -10,6 +10,7 @@ export function ProductProvider({ children }) {
   const [cart, setCart] = useState([]);
   const [sellers, setSellers] = useState([]);
   const [products, setProducts] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     async function fetchAPI() {
@@ -47,7 +48,7 @@ export function ProductProvider({ children }) {
 
   return (
     <ProductContext.Provider
-      value={ { cart, sellers, products, addOnCart, removeOfTheCart } }
+      value={ { cart, sellers, products, addOnCart, removeOfTheCart, orders, setOrders } }
     >
       {children}
     </ProductContext.Provider>

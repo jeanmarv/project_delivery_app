@@ -52,6 +52,7 @@ export default function LoginForm() {
     }
     await setUser({ ...user, ...request });
     await setError('');
+    localStorage.user = JSON.stringify(user);
     navigate('/');
   };
 
