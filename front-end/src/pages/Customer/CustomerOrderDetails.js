@@ -19,6 +19,8 @@ const CustomerOrderDetailsContainer = styled(ContainerCenter)`
   }
 `;
 
+const dIdStatus = 'customer_order_details__element-order-details-label-delivery-status';
+
 export default function CustomerOrdersDetails() {
   const { user } = useContext(GlobalContext);
   const { orders } = useContext(ProductContext);
@@ -42,15 +44,14 @@ export default function CustomerOrdersDetails() {
           {orders.saleDate}
         </p>
         <p
-          data-testid="
-            customer_order_details__element-order-details-label-delivery-status
-          "
+          data-testid={ dIdStatus }
         >
           {orders.status}
         </p>
         <button
           type="button"
           data-testid="customer_order_details__button-delivery-check"
+          disabled
         >
           MARCAR COMO ENTREGUE
         </button>
